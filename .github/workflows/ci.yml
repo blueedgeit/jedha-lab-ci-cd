@@ -17,12 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]
+        python-version: [3.8, 3.9, '3.10']
     steps:
       - name: Ckeckout repository
         uses: actions/checkout@v5
 
-      - name: Setup Pyhton
+      - name: Setup Pyhton ${{ matrix.python-version }}
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
