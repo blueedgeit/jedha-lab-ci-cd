@@ -11,22 +11,27 @@ on:
 permissions:
   contents: read
   security-events: write
-  
+
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10]
     steps:
       - name: Ckeckout repository
         uses: actions/checkout@v5
+
       - name: Setup Pyhton
         uses: actions/setup-python@v6
         with:
-          python-version: '3.12'
+          python-version: ${{ matrix.python-version }}
+
       - name: install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pytest
+
       - name: Run tests
         run: |
           pytest tests/
